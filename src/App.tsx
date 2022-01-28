@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import Dashboard from "./components/Dashboard";
+import Loader from "./components/Loader";
+import Sidebar from "./components/Sidebar";
+import { useLocation } from "./context/LocationContext";
+import useGeoLocation from "./hooks/useGeoLocation";
+import { useSearchLocation } from "./hooks/useSearchLocation";
+import * as S from "./style/App";
 
 function App() {
+  const { getGeoLocation } = useGeoLocation();
+  const { location } = useLocation();
+  const { queryLocation } = useSearchLocation();
+  const locationExists = Object.keys(location).length;
+
+  useEffect(() => {
+    defaultLocal();
+    getGeoLocation();
+  }, []);
+
+  async function defaultLocal() {
+    if (!locationExists) {
+      await queryLocation("Rio");
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <S.Container>
+      {!locationExists ? (
+        <Loader />
+      ) : (
+        <>
+          <Sidebar />
+          <Dashboard />
+        </>
+      )}
+    </S.Container>
   );
 }
 
