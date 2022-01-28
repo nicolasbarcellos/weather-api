@@ -17,7 +17,7 @@ export default function useGeoLocation() {
     try {
       const res = await axios
         .get(
-          `https://www.metaweather.com/api/location/search/?lattlong=${position.coords.latitude},${position.coords.longitude}`
+          `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong=${position.coords.latitude},${position.coords.longitude}`
         )
         .then((response) => {
           const { woeid } = response.data[0];

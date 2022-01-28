@@ -14,7 +14,7 @@ export const useSearchLocation = () => {
     setIsPending(true);
     try {
       const res = await axios.get(
-        `https://www.metaweather.com/api/location/search/?query=${local}`
+        `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${local}`
       );
       const localsTitle = res.data.map((local: any) => local.title);
       if (!isCancelled) {
@@ -36,7 +36,9 @@ export const useSearchLocation = () => {
     setProgress(60);
     try {
       const res = await axios
-        .get(`https://www.metaweather.com/api/location/search/?query=${local}`)
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${local}`
+        )
         .then((res) => {
           const { woeid } = res.data[0];
           const response = api.get(`${woeid}`);
