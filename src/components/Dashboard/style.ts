@@ -52,6 +52,10 @@ export const Container = styled.div`
     gap: 2rem;
     margin-top: 6rem;
 
+    @media (max-width: 400px) {
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    }
+
     .box {
       background: var(--sidebarBg);
       position: relative;

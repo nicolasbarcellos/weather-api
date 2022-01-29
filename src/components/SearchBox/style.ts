@@ -28,7 +28,7 @@ export const InputBox = styled.aside<InputBoxProps>`
     max-width: 100%;
     left: ${(props) => (props.isOpenSearchModal ? "0" : "-100%")};
     right: 0;
-    padding: 2rem 2rem;
+    padding: 2rem;
   }
 
   > svg {
@@ -52,7 +52,9 @@ export const InputBox = styled.aside<InputBoxProps>`
     width: 100%;
 
     @media (max-width: 850px) {
-      flex-direction: column;
+      gap: 1rem;
+      
+
     }
 
     button {
@@ -67,7 +69,8 @@ export const InputBox = styled.aside<InputBoxProps>`
       transition: 0.3s;
 
       @media (max-width: 850px) {
-        width: 100%;
+        /* width: 100%; */
+        padding: 0 1.4rem;
       }
 
       &:hover {
